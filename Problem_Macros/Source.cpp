@@ -1,15 +1,14 @@
 #include <iostream>
-#define LOL 5
+// #define test1
+// #define recursion
+
 int main()
 {
-#if LOL >5
+#ifdef test1
 	for (int i = 0; i < 4; ++i)
 		std::cout << i << " ";
-	
 
 	std::cout << "HALLO";
-#else
-	std::cout << "ANIME";
 #endif
 	return 0;
 }
