@@ -1,15 +1,15 @@
 #include <iostream>
 // #define test1
-// #define recursion_io
-#define recursion_reverse
+#define recursion_io
+// #define recursion_reverse
 
 void io_numbers()
 {
 	int a;
 	std::cin >> a;
-	std::cout << a << " ";
 	if (a == 0) return;
 	io_numbers();
+	std::cout << a << " ";
 }
 void io_reverse_numbers(int n)
 {
@@ -38,7 +38,7 @@ int main()
 
 
 #ifdef recursion_io
-	input_the_numbers();
+	io_numbers();
 #endif
 
 
