@@ -5,25 +5,17 @@
 // a sequence of positive integers using recursion.
 //
 
-int iorow(int n)
+void iorow()
 {
-	int temp = n;
-	std::cout << n << " ";
+	int n;
 	std::cin >> n;
-	if (n == 0) {
-		std::cout << n << " ";
-		return n;
-	}
-	return iorow(n);
+	if (n == 0) return;
+	iorow();
 	std::cout << n << " ";
 }
 
 int main()
 {
-
-	int n = 0;
-	std::cin >> n;
-	iorow(n);
+	iorow();
 	return 0;
-
 }
