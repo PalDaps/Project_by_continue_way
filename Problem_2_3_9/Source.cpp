@@ -9,14 +9,18 @@
 void rotate(int a[], unsigned size, int shift)
 {
 	int first_elem = shift % size;
-	for (first_elem; first_elem < size; ++first_elem)
+	for (int k = 0; k < shift % size; ++k)
 	{
-		std::cout << a[first_elem] << " ";
+	
+		for (int i = 1; i < size; i++)
+		{
+			int temp = a[i-1];
+			a[i - 1] = a[i];
+			a[i] = temp;
+		}
 	}
-	for (int i = 0; i < shift%size; i++)
-	{
+	for (int i = 0; i < size; ++i)
 		std::cout << a[i] << " ";
-	}
 }
 
 int main()
