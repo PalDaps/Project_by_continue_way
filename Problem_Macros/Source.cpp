@@ -1,7 +1,8 @@
 #include <iostream>
 // #define test1
-#define recursion_io
+// #define recursion_io
 // #define recursion_reverse
+// #define memory
 
 void io_numbers()
 {
@@ -46,6 +47,11 @@ int main()
 	int n = 0;
 	std::cin >> n;
 	io_reverse_numbers(n);
+#endif
+
+#ifdef memory
+
+
 #endif
 	return 0;
 }
