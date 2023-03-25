@@ -9,6 +9,25 @@
 // string with the characters read.
 //
 
+char* getline_mine()
+{
+
+}
+
+char* memory_oxp(char *arr_of_char, int new_size, int size, int i)
+{
+	char* more_size_arr = new char[new_size];
+	size = new_size;
+	for (int j = 0; j < i; j++)
+	{
+		more_size_arr[j] = arr_of_char[j];
+	}
+	delete[] arr_of_char;
+	arr_of_char = more_size_arr;
+
+}
+
+
 int main()
 {
 	char symbol = 'a';
