@@ -37,7 +37,6 @@ int main()
 	}
 	std::cout << std::endl;
 	std::cout << resize(str, size, 3);
-	// delete[] str;
-
+	// delete[] str
 	return 0;
 }
