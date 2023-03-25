@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 //
 // Implement the getline function, which reads the 
@@ -83,6 +82,5 @@ int main()
 	*/
 	getline_mine();
 	// delete[] arr_of_char;
-	
 	return 0;
 }
