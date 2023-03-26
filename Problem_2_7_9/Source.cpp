@@ -35,29 +35,32 @@ int** transpose(int* const* m, unsigned rows, unsigned cols)
 			ma[i][j] = m[i][j];
 		}
 	}
+	int** trans = new int* [cols];
 	for (unsigned int i = 0; i < cols; i++)
 	{
-		for (unsigned int j = i; j < rows; j++)
+		trans[i] = new int[rows];
+	}
+	for (unsigned int i = 0; i < cols; i++)
+	{
+		for (unsigned int j = 0; j < rows; j++)
 		{
-			int temp = ma[j][i];
-			ma[j][i] = ma[i][j];
-			ma[i][j] = temp;
+			trans[i][j] = ma[j][i];
 		}
 	}
-	for (unsigned int i = 0; i < rows; i++)
+	for (unsigned int i = 0; i < cols; i++)
 	{
-		for (unsigned int j = 0; j < cols; j++)
+		for (unsigned int j = 0; j < rows; j++)
 		{
-			std::cout << ma[i][j] << "\t";
+			std::cout << trans[i][j] << "\t";
 		}
 		std::cout << std::endl;
 	}
-	return ma;
+	return trans;
 }
 
 int main()
 {
-	int rows = 2, cols = 5, counter = 1;
+	int rows = 2, cols = 2, counter = 1;
 	int** m = new int*[rows];
 	for (int i = 0; i < rows; i++)
 	{
