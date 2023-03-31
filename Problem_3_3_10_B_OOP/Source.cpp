@@ -22,7 +22,7 @@ struct string_mine_one
 		{
 			new_str[i] = str_main[i];
 		}
-		new_str[size + 1] = '\0';
+		new_str[size] = '\0';
 		this->str = new_str;
 	}
 	size_t size;
