@@ -34,11 +34,26 @@ struct string_mine_three
 	}
 	void append(string_mine_three& stroka)
 	{
-		std::cout << this->size;
+		size_t size_of_line2 = stroka.size;
+		char* word = new char[this->size + stroka.size + 1];
+		for (int i = 0; i < this->size; i++)
+		{
+			word[i] = this->str[i];
+		}
+		for (int i = this->size, k = 0; i < this->size + stroka.size; i++, k++)
+		{
+			word[i] = stroka.str[k];
+		}
+		word[this->size + stroka.size] = '\0';
+		delete[] str;
+		this->str = word;
+		this->size = this->size + stroka.size;
+		std::cout << this->str;
 	}
 	~string_mine_three()
 	{
 		delete[] this->str;
+		
 	}
 	size_t size;
 	char* str;
@@ -46,9 +61,8 @@ struct string_mine_three
 
 int main()
 {
-	string_mine_three line1("hello");
-	string_mine_three line2(" world!");
+	string_mine_three line1("a");
+	string_mine_three line2("b");
 	line1.append(line2);
-	std::cout << line1.str;
 	return 0;
 }
