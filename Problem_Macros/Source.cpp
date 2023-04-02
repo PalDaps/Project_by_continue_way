@@ -31,12 +31,23 @@ struct Point
 {
 	double x;
 	double y;
+	void shift(Point *lala, double value_x, double value_y)
+	{
+		this->x = this->x + x; // обращаемс€ к соответствующему полю экземпл€ра lala
+		this->y = this->y + y; 
+		std::cout << this->x << " " << this->y << std::endl;
+		std::cout << lala->x << " " << lala->y << std::endl;
+		x = x + value_x; // это че? j
+		y = y + value_y; // это че?
+		std::cout << x << " " << y;
+	}
 };
 
 struct Segment
 {	
     Point t1;
 	Point t2;
+
 };
 
 
@@ -82,8 +93,9 @@ int main()
 #ifdef testing_structs
 	Point one = { 2.5, 3.9 };
 	Point two = { 6.4, 1.3 };
-	Segment line = { one, two };
-	std::cout << length_of_line(line);
+	// Segment line = { one, two };
+	// std::cout << length_of_line(line);
+	one.shift(&one, 1.0, 1.0);
 #endif
 	return 0;
 }
