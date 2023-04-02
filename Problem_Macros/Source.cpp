@@ -3,6 +3,7 @@
 // #define recursion_io
 // #define recursion_reverse
 // #define memory
+#define testing_structs
 
 void io_numbers()
 {
@@ -25,6 +26,31 @@ void io_reverse_numbers(int n)
 	}
 	io_reverse_numbers(n);
 }
+
+struct Point
+{
+	double x;
+	double y;
+};
+
+struct Segment
+{	
+    Point t1;
+	Point t2;
+};
+
+
+double length_of_line(Segment object)
+{
+	double dx;
+	double dy;
+	dx = object.t1.x - object.t2.x;
+	std::cout << dx << std::endl;
+	dy = object.t1.y - object.t2.y;
+	std::cout << dy << std::endl;
+	return sqrt(pow(dx, 2) - pow(dy, 2));
+}
+
 
 int main()
 {
@@ -52,6 +78,12 @@ int main()
 #ifdef memory
 
 
+#endif
+#ifdef testing_structs
+	Point one = { 2.5, 3.9 };
+	Point two = { 6.4, 1.3 };
+	Segment line = { one, two };
+	std::cout << length_of_line(line);
 #endif
 	return 0;
 }
