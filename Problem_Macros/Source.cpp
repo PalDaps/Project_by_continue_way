@@ -1,10 +1,12 @@
 #include <iostream>
+#include <string>
 // #define test1
 // #define recursion_io
 // #define recursion_reverse
 // #define memory
-#define testing_structs
-
+// #define testing_structs
+// #define DynamicArr
+#define ConstructorOfCoping
 void io_numbers()
 {
 	int a;
@@ -62,6 +64,10 @@ double length_of_line(Segment object)
 	return sqrt(pow(dx, 2) - pow(dy, 2));
 }
 
+std::string spaces(size_t n)
+{
+}
+
 
 int main()
 {
@@ -96,6 +102,36 @@ int main()
 	// Segment line = { one, two };
 	// std::cout << length_of_line(line);
 	one.shift(&one, 1.0, 1.0);
+#endif
+#ifdef DynamicArr
+	int size = 5;
+	int** pointer = new int* [size];
+	for (int i = 0; i < size; i++)
+	{
+		pointer[i] = new int[size];
+	}
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			pointer[i][j] = 1;
+		}
+	}
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			std::cout << pointer[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		delete[] pointer[i];
+	}
+#endif
+#ifdef ConstructorOfCoping
+
 #endif
 	return 0;
 }

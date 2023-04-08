@@ -59,6 +59,8 @@ struct string_mine_three
 	char* str;
 };
 
+
+
 int main()
 {
 	string_mine_three line1("a");
