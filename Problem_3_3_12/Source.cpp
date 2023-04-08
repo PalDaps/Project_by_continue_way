@@ -53,18 +53,30 @@ struct string_mine_three
 	~string_mine_three()
 	{
 		delete[] this->str;
-		
+
 	}
 	size_t size;
 	char* str;
 };
 
-
+string_mine_three spaces(size_t n)
+{
+	const string_mine_three s(n, 'a');
+	return s;
+}
+void foo(string_mine_three object)
+{
+	std::cout << object.str << "\n";
+}
 
 int main()
 {
 	string_mine_three line1("a");
 	string_mine_three line2("b");
-	line1.append(line2);
+	// std::cout << spaces(10).str << "\n";
+	string_mine_three ten_spaces;
+	// ten_spaces = string_mine_three(10, 'a');
+	// std::cout << ten_spaces.str << "\n";
+	// foo(string_mine_three(10, 'a'));
 	return 0;
 }
