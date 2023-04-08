@@ -37,14 +37,17 @@ struct String
 	}
 	String& operator=(const String& other)
 	{
-		delete[] str;
-		this->size = other.size;
-		this->str = new char[other.size + 1];
-		for (int i = 0; i < other.size; i++)
+		if (this != &other)
 		{
-			this->str[i] = other.str[i];
+		     delete[] str;
+		     this->size = other.size;
+		     this->str = new char[other.size + 1];
+		     for (int i = 0; i < other.size; i++)
+		     {
+		     	this->str[i] = other.str[i];
+		     }
+		     this->str[other.size] = '\0';
 		}
-		this->str[other.size] = '\0';
 		return *this;
 	}
 	String(const String& other)
