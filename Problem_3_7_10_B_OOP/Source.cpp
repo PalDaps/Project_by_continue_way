@@ -1,5 +1,10 @@
 #include <iostream>
 
+//
+// Add an implementation of the copy constructor to the String class. 
+// The class invariant remains the same
+//
+
 struct String
 {
 	String(const char* str_main = "")
