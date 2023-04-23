@@ -8,7 +8,7 @@
 // #define DynamicArr
 // #define ConstructorOfCoping
 // #define PolymorphismFromSimple
-#define PurelyVirtualDestructors
+// #define PurelyVirtualDestructorsFromeSimple
 
 
 class A
@@ -18,12 +18,10 @@ public:
 	{
 		std::cout << "Dynamic memory is allocated A" << std::endl;
 	}
-	virtual ~A()
-	{
-		std::cout << "Dynamic memory is cleaned A" << std::endl;
-	}
-
+	virtual ~A() = 0;
 };
+
+A::~A() {};
 
 class B : public A
 {
@@ -233,9 +231,9 @@ int main()
 	// Daps.shoot(&gun);
 	// Daps.shoot(&bazooka);
 #endif
-#ifdef PurelyVirtualDestructors
-	A* bptr = new B;
-	delete bptr;
+#ifdef PurelyVirtualDestructorsFromSimple
+	// A* bptr = new B;
+	// delete bptr;
 #endif
 	return 0;
 }
