@@ -1,21 +1,28 @@
 #include <iostream>
 
+//
+// Develop an Expression class hierarchy to represent arithmetic 
+// expressions. When the BinaryOperation object is destroyed, 
+// it is responsible for destroying the left and right operands 
+// (it is guaranteed that they are allocated in dynamic memory).
+//
+
 class Expression
 {
 public:
 	virtual double evaluate() const = 0;
 	virtual ~Expression()
 	{
-		std::cout << "destructor frome Expression" << std::endl;
+
 	}
 };
+
 
 class Number : Expression
 {
 public:
 	Number(double value) : value(value)
 	{
-
 	}
 	double evaluate() const
 	{
@@ -24,7 +31,6 @@ public:
 	~Number()
 	{
 		std::cout << "Destructor frome Number" << std::endl;
-		delete this;
 	}
 	
 private:
@@ -48,9 +54,9 @@ public:
 		case '+' :
 			return left->evaluate() + right->evaluate();
 		case '/' :
-			return left->evaluate() + right->evaluate();
+			return left->evaluate() / right->evaluate();
 		case '-' :
-			return left->evaluate() + right->evaluate();
+			return left->evaluate() - right->evaluate();
 		default :
 			return 0;
 		}
@@ -59,21 +65,23 @@ public:
 	~BinaryOperation()
 	{
 		std::cout << "Destructor from BinaryOperation" << std::endl;
-		delete this;
+		delete left;
+		delete right;
 	}
 
 private:
 	Expression const* left;
-	Expression const* right;
 	char op;
+	Expression const* right;
+
 };
 
 int main()
 {
 	Number a(4.5);
-	Expression* sube = (Expression *)new BinaryOperation((Expression*)new Number(4.5), '*', (Expression*)new Number(5));
+	Expression* sube = (Expression*)new BinaryOperation((Expression*)new Number(4.5), '*', (Expression*)new Number(5));
 	Expression* expr = (Expression*)new BinaryOperation((Expression*)new Number(3), '+', sube);
 	std::cout << expr->evaluate() << std::endl;
-
+	delete expr;
 	return 0;
 }
