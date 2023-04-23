@@ -7,7 +7,38 @@
 // #define testing_structs
 // #define DynamicArr
 // #define ConstructorOfCoping
-#define PolymorphismFromSimple
+// #define PolymorphismFromSimple
+#define PurelyVirtualDestructors
+
+
+class A
+{
+public:
+	A()
+	{
+		std::cout << "Dynamic memory is allocated A" << std::endl;
+	}
+	virtual ~A()
+	{
+		std::cout << "Dynamic memory is cleaned A" << std::endl;
+	}
+
+};
+
+class B : public A
+{
+public:
+	B()
+	{
+		std::cout << "Dynamic memory is allocated B" << std::endl;
+	}
+	~B() override
+	{
+		std::cout << "Dynamic memory is cleaned B" << std::endl;
+	}
+};
+
+
 class Weapon
 { 
 public:
@@ -201,6 +232,10 @@ int main()
 	// Daps.shoot(&machigun);
 	// Daps.shoot(&gun);
 	// Daps.shoot(&bazooka);
+#endif
+#ifdef PurelyVirtualDestructors
+	A* bptr = new B;
+	delete bptr;
 #endif
 	return 0;
 }
