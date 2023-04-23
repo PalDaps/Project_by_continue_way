@@ -7,16 +7,20 @@
 // #define testing_structs
 // #define DynamicArr
 // #define ConstructorOfCoping
-#define Polymorphism
+#define PolymorphismFromSimple
 class Weapon
-{
+{ 
 public:
 	virtual void shoot() = 0;
+	void Foo()
+	{
+		std::cout << " Foo()" << std::endl;
+	}
 };
-class Gun
+class Gun : public Weapon
 {
 public:
-	virtual void shoot()
+	void shoot() override
 	{
 		std::cout << "BAANG!" << std::endl;
 	}
@@ -31,7 +35,7 @@ public:
 	}
 };
 
-class Bazooka : public Gun
+class Bazooka : public Weapon
 {
 public:
 	void shoot() override
@@ -40,12 +44,20 @@ public:
 	}
 };
 
+class Knife : public Weapon
+{
+public:
+	void shoot() override
+	{
+		std::cout << "HUYAK" << std::endl;
+	}
+};
 class Player
 {
 public:
-	void shoot(Gun* gun)
+	void shoot(Weapon* weapon)
 	{
-		gun->shoot();
+		weapon->shoot();
 	}
 };
 void io_numbers()
@@ -183,9 +195,12 @@ int main()
 	// gun.shoot();
 	// machigun.shoot();
 	Player Daps;
-	Daps.shoot(&machigun);
-	Daps.shoot(&gun);
-	Daps.shoot(&bazooka);
+	Knife kerambit;
+	// kerambit.Foo();
+	// Daps.shoot(&kerambit);
+	// Daps.shoot(&machigun);
+	// Daps.shoot(&gun);
+	// Daps.shoot(&bazooka);
 #endif
 	return 0;
 }
