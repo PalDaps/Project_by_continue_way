@@ -6,7 +6,48 @@
 // #define memory
 // #define testing_structs
 // #define DynamicArr
-#define ConstructorOfCoping
+// #define ConstructorOfCoping
+#define Polymorphism
+class Weapon
+{
+public:
+	virtual void shoot() = 0;
+};
+class Gun
+{
+public:
+	virtual void shoot()
+	{
+		std::cout << "BAANG!" << std::endl;
+	}
+};
+
+class SubmachineGun : public Gun
+{
+public:
+	void shoot() override
+	{
+		std::cout << "BANG! BANG! BANG!" << std::endl;
+	}
+};
+
+class Bazooka : public Gun
+{
+public:
+	void shoot() override
+	{
+		std::cout << "BOOOM!" << std::endl;
+	}
+};
+
+class Player
+{
+public:
+	void shoot(Gun* gun)
+	{
+		gun->shoot();
+	}
+};
 void io_numbers()
 {
 	int a;
@@ -64,9 +105,6 @@ double length_of_line(Segment object)
 	return sqrt(pow(dx, 2) - pow(dy, 2));
 }
 
-std::string spaces(size_t n)
-{
-}
 
 
 int main()
@@ -132,6 +170,22 @@ int main()
 #endif
 #ifdef ConstructorOfCoping
 
+#endif
+
+#ifdef Polymorphism
+	Gun gun;
+	SubmachineGun machigun;
+	Bazooka bazooka;
+	// gun.shoot();
+	// Gun* pointer = &machigun;
+
+	// pointer->shoot();
+	// gun.shoot();
+	// machigun.shoot();
+	Player Daps;
+	Daps.shoot(&machigun);
+	Daps.shoot(&gun);
+	Daps.shoot(&bazooka);
 #endif
 	return 0;
 }
