@@ -9,7 +9,7 @@
 // #define ConstructorOfCoping
 // #define PolymorphismFromSimple
 // #define PurelyVirtualDestructorsFromeSimple
-
+#define Lecture2MIPT
 
 class A
 {
@@ -146,6 +146,20 @@ double length_of_line(Segment object)
 	return sqrt(pow(dx, 2) - pow(dy, 2));
 }
 
+int foo()
+{
+	return 42;
+}
+
+void foo_1(int* x)
+{
+	g = *x;
+}
+
+void bar(int& x)
+{
+	g = x;
+}
 
 
 int main()
@@ -234,6 +248,16 @@ int main()
 #ifdef PurelyVirtualDestructorsFromSimple
 	// A* bptr = new B;
 	// delete bptr;
+#endif
+#ifdef Lecture2MIPT
+	int x;
+	int& rx = x;
+	const int& l = foo();
+	std::cout << &l << " " << &x << " " << &rx << std::endl;
+	// using links
+	int x;
+
+
 #endif
 	return 0;
 }
