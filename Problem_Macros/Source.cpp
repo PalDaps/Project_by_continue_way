@@ -295,7 +295,7 @@ int main()
 
 #endif
 #ifdef Sobes
-	int a = 101010101010;
+	int a = 1010;
 	int count0 = 0;
 	int count1 = 0;
 	for (int i = 0; i < sizeof(a) * 8; i++) {
