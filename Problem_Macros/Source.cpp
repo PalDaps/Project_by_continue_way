@@ -9,8 +9,9 @@
 // #define ConstructorOfCoping
 // #define PolymorphismFromSimple
 // #define PurelyVirtualDestructorsFromeSimple
-#define Lecture2MIPT
-
+// #define Lecture2MIPT
+// #define TheProblem44
+#define Sobes
 class A
 {
 public:
@@ -153,14 +154,46 @@ int foo()
 
 void foo_1(int* x)
 {
+	int g;
 	g = *x;
 }
 
 void bar(int& x)
 {
+	int g;
 	g = x;
 }
 
+struct Person
+{
+	virtual ~Person() {}
+	Person(std::string name)
+	{
+		this->name_ = name;
+	}
+	virtual std::string name() const { return name_; }
+	// virtual std::string occupation() const = 0;
+	std::string name_;
+};
+
+struct Student : Person {
+	std::string occupation() const { return "student"; }
+	virtual int group() const { return group_; }
+private:
+	int group_;
+};
+
+struct Teacher : Person {
+	Teacher(std::string const& name) : Person(name)
+	{
+		std::cout << this->name();
+	}
+};
+
+struct Professor : Teacher {
+	Professor(std::string const& name) : Teacher(name) {}
+	std::string name() const override { return "Prof. " + name_; }
+};
 
 int main()
 {
@@ -256,8 +289,28 @@ int main()
 	std::cout << &l << " " << &x << " " << &rx << std::endl;
 	// using links
 	int x;
-
+#endif
+#ifdef TheProblem44
+	Professor p("Strausstrup");
 
 #endif
+#ifdef Sobes
+	int a = 101010101010;
+	int count0 = 0;
+	int count1 = 0;
+	for (int i = 0; i < sizeof(a) * 8; i++) {
+		int bit = (a >> i) & 1; // Extract the i-th bit using bitwise shift and bitwise AND
+
+		if (bit == 0) {
+			count0++; // Increment the count of 0s
+		}
+		else {
+			count1++; // Increment the count of 1s
+		}
+	}
+	std::cout << "Count0 " << count0 << std::endl; // idi nahui
+	std::cout << "Count1 " << count1 << std::endl;
+#endif
+
 	return 0;
 }
