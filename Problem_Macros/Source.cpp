@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 // #define test1
 // #define recursion_io
 // #define recursion_reverse
@@ -11,7 +12,9 @@
 // #define PurelyVirtualDestructorsFromeSimple
 // #define Lecture2MIPT
 // #define TheProblem44
-#define Sobes
+// #define Sobes
+// #define VirtualBasefromSimple
+#define Lecture3MIPT
 class A
 {
 public:
@@ -195,6 +198,113 @@ struct Professor : Teacher {
 	std::string name() const override { return "Prof. " + name_; }
 };
 
+class Msg
+{
+	std::string msg;
+public:
+	Msg(std::string msg)
+	{
+		this->msg = msg;
+	}
+	virtual std::string GetMsg()
+	{
+		return msg;
+	}
+};
+
+class Printer
+{
+public:
+	void Print(Msg* msg)
+	{
+		std::cout << msg->GetMsg() << std::endl;
+	}
+};
+
+class BraketsMsg : public Msg
+{
+public:
+	BraketsMsg(std::string msg) : Msg(msg)
+	{
+	}
+	std::string GetMsg() override
+	{
+		return "[" + GetMsg() + "]";
+	}
+};
+
+class String
+{
+	char* arr;
+	size_t sz;
+	size_t cap;
+
+public:
+	String(size_t n, char c) : arr(new char[n]), sz(n), cap(n) {
+		memset(arr, c, n);
+	}
+
+	String(const String& s) : String(s.sz, '\0') { // delegatin constructors 
+		memcpy(arr, s.arr, sz);
+	}
+
+	String(std::initializer_list<char> lst)
+			: arr(new char[lst.size()])
+			, sz(lst.size())
+			, cap(lst.size())
+	{
+		std::copy(lst.begin(), lst.end(), arr);
+	}
+
+	// operators overloading
+	String& operator=(String s) {
+		/*
+		if (this == &s) return *this;
+
+		delete[] arr; // very expensive operator
+
+		arr = new char[s.cap]; // very expensive operator
+		sz = s.sz;
+		cap = s.cap;
+
+		memcpy(arr, s.arr, sz);
+		return *this;
+		*/
+		// copy and swap
+		// the beatiful realisation of operator =;
+		swap(s);
+		return *this;
+	}
+
+	// for copy and swap
+	void swap(String& s) {
+		std::swap(arr, s.arr);
+		std::swap(sz, s.sz);
+		std::swap(cap, s.cap);
+	}
+
+	~String() {
+		delete[] arr;
+	}
+};
+
+class BigInteger {
+	std::vector<int> digits;
+
+	// Arithmetic operators.
+
+	BigInteger operator+(const BigInteger& another) {
+		BigInteger sum;
+		// realisation ...
+		return sum;
+	}
+
+	BigInteger& operator+=(const BigInteger& another) {
+		// ....
+		return *this;
+	}
+};
+
 int main()
 {
 #ifdef test1
@@ -310,6 +420,21 @@ int main()
 	}
 	std::cout << "Count0 " << count0 << std::endl; // idi nahui
 	std::cout << "Count1 " << count1 << std::endl;
+#endif
+
+#ifdef VirtualBasefromSimple
+
+	BraketsMsg m("Zdarova!");
+	Printer p;
+	p.Print(&m);
+
+#endif
+#ifdef Lecture3MIPT
+	size_t k = 8;
+	int x = x;
+	std::cout 
+	// String s2 = s;
+	
 #endif
 
 	return 0;
