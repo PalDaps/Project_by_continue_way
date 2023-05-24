@@ -77,14 +77,14 @@ private:
 
 bool check_equals(Expression const* left, Expression const* right)
 {
-
+	return *((int**)left) == *((int**)right);
 }
 
 int main()
 {
 	Number left(2.5);
 	Number right(3.0);
-	BinaryOperation* binary = new BinaryOperation(left, '+', right);
+	// BinaryOperation* binary = new BinaryOperation(left, '+', right);
 
 	return 0;
 }
