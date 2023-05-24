@@ -6,6 +6,7 @@
 // if both pointers actually point to objects of the same class, 
 // and false otherwise
 //
+
 class Expression
 {
 public:
