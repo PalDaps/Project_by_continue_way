@@ -21,7 +21,9 @@ struct Number : Expression
 private:
 	double value;
 public:
-	Number(double value);
+	Number(double value) : value(value) {
+
+	}
 	double evaluate() const override {
 		return value;
 	}
@@ -45,21 +47,37 @@ public:
 
 	}
 	~BinaryOperation() {
-
-	}
-	double evaluate() const {
-		switch (op) {
-		case '*' : 
-			return left->evaluate() * right->evaluate();
-		case '/' :
-			return left->evaluate() / right->evaluate();
-		case '+' :
-			return left->evaluate() / right->evaluate();
-		case '-' :
-			return left->evaluate() / right->evaluate();
-		default :
-			return 0;
+		if (left) {
+			if (left != right) {
+				delete left;
+				left = nullptr;
+			}
 		}
+		if (right) {
+			delete right;
+			right = nullptr;
+		}
+	}
+	double evaluate() const override {
+		if (left != nullptr && right != nullptr) {
+			switch (op) {
+			case '*':
+				return left->evaluate() * right->evaluate();
+			case '/':
+				if (right->evaluate())
+					return left->evaluate() / right->evaluate();
+			case '+':
+				return left->evaluate() + right->evaluate();
+			case '-':
+				return left->evaluate() - right->evaluate();
+			default:
+				return 0;
+			}
+		}
+		else return 0;
+	}
+	void visit(Visitor* visitor) const override {
+		visitor->visitBinaryOption(this);
 	}
 	Expression const* get_left() const {
 		return left;
@@ -82,5 +100,8 @@ struct PrintVisitor : Visitor {
 
 int main()
 {
+	Expression* exp = new BinaryOperation(new Number(5), '*', new Number(5));
+	std::cout << "hello";
+	Number a(2.5);
 	return 0;
 }
