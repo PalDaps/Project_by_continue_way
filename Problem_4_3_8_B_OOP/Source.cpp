@@ -11,9 +11,7 @@ class Expression
 {
 public:
 	virtual double evaluate() const = 0;
-	virtual ~Expression()
-	{
-
+	virtual ~Expression() {
 	}
 };
 
@@ -21,16 +19,11 @@ public:
 class Number : Expression
 {
 public:
-	Number(double value) : value(value)
-	{
+	Number(double value) : value(value) {
+
 	}
-	double evaluate() const
-	{
-		return value;
-	}
-	~Number()
-	{
-		std::cout << "Destructor frome Number" << std::endl;
+	double evaluate() const override;
+	~Number() {
 	}
 	
 private:
@@ -41,32 +34,36 @@ class BinaryOperation : Expression
 {
 public:
 	BinaryOperation(Expression const* left, char op, Expression const* right)
-		: left(left), op(op), right(right)
-	{
-
+		: left(left), op(op), right(right) {
 	}
-	double evaluate() const
-	{
-		switch(op)
-		{ 
-		case '*' :
-			return (*left).evaluate() * (*right).evaluate();
-		case '+' :
-			return left->evaluate() + right->evaluate();
-		case '/' :
-			return left->evaluate() / right->evaluate();
-		case '-' :
-			return left->evaluate() - right->evaluate();
-		default :
-			return 0;
+	double evaluate() const override {
+		if (left != nullptr && right != nullptr) {
+			switch (op) {
+			case '*':
+				return (*left).evaluate() * (*right).evaluate();
+			case '+':
+				return left->evaluate() + right->evaluate();
+			case '/':
+				if (right->evaluate())
+					return left->evaluate() / right->evaluate();
+			case '-':
+				return left->evaluate() - right->evaluate();
+			default:
+				return 0;
+			}
 		}
+		else return 0;
 
 	}
-	~BinaryOperation()
-	{
-		std::cout << "Destructor from BinaryOperation" << std::endl;
-		delete left;
-		delete right;
+	~BinaryOperation() {
+		if (left) {
+			if (left != right) {
+				delete left;
+				left = nullptr;
+			}	
+		}
+		if (right)
+			delete right;
 	}
 
 private:
@@ -75,6 +72,10 @@ private:
 	Expression const* right;
 
 };
+
+double Number::evaluate() const {
+	return value;
+}
 
 int main()
 {
