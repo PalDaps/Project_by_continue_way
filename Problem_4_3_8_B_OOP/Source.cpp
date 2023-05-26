@@ -16,7 +16,7 @@ public:
 };
 
 
-class Number : Expression
+class Number : public Expression
 {
 public:
 	Number(double value) : value(value) {
@@ -24,13 +24,14 @@ public:
 	}
 	double evaluate() const override;
 	~Number() {
+
 	}
 	
 private:
 	double value;
 };
 
-class BinaryOperation : Expression
+class BinaryOperation : public Expression
 {
 public:
 	BinaryOperation(Expression const* left, char op, Expression const* right)
@@ -79,10 +80,11 @@ double Number::evaluate() const {
 
 int main()
 {
-	Number a(4.5);
-	Expression* sube = (Expression*)new BinaryOperation((Expression*)new Number(4.5), '*', (Expression*)new Number(5));
-	Expression* expr = (Expression*)new BinaryOperation((Expression*)new Number(3), '+', sube);
-	std::cout << expr->evaluate() << std::endl;
-	delete expr;
+	Number l(5);
+	Expression* lp = &l;
+	Number r(5);
+	Expression* rp = &r;
+	BinaryOperation result(lp, '*', rp);
+	std::cout << result.evaluate();
 	return 0;
 }
