@@ -57,14 +57,14 @@ public:
 
 	}
 	~BinaryOperation() {
-		if (left) {
+		if (left) { 
 			if (left != right) {
-				delete left;
+				delete left; // delete stack memory
 				left = nullptr;
 			}	
 		}
 		if (right)
-			delete right;
+			delete right; // delete stack memory
 	}
 
 private:
