@@ -59,12 +59,12 @@ public:
 	~BinaryOperation() {
 		if (left) { 
 			if (left != right) {
-				delete left; // delete stack memory
+				delete left; 
 				left = nullptr;
 			}	
 		}
 		if (right)
-			delete right; // delete stack memory
+			delete right;
 	}
 
 private:
@@ -80,11 +80,7 @@ double Number::evaluate() const {
 
 int main()
 {
-	Number l(5);
-	Expression* lp = &l;
-	Number r(5);
-	Expression* rp = &r;
-	BinaryOperation result(lp, '*', rp);
-	std::cout << result.evaluate();
+	Expression* exp = new BinaryOperation(new Number(4.5), '*', new Number(2));
+	std::cout << exp->evaluate();
 	return 0;
 }
