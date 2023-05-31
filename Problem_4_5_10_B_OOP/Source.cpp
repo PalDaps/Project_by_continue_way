@@ -5,7 +5,7 @@ struct BinaryOperation;
 
 struct Visitor {
 	virtual void visitNumber(Number const* number) = 0;
-	virtual void visitBinaryOption(BinaryOperation const* operation) = 0;
+	virtual void visitBinaryOperation(BinaryOperation const* operation) = 0;
 	virtual ~Visitor() {}
 };
 
@@ -77,7 +77,7 @@ public:
 		else return 0;
 	}
 	void visit(Visitor* visitor) const override {
-		visitor->visitBinaryOption(this);
+		visitor->visitBinaryOperation(this);
 	}
 	Expression const* get_left() const {
 		return left;
@@ -85,14 +85,19 @@ public:
 	Expression const* get_right() const {
 		return right;
 	}
+	char get_op() const {
+		return op;
+	}
 };
 
-struct PrintVisitor : Visitor {
+struct PrintBinaryOperationVisitor : Visitor {
 	void visitNumber(Number const* number) {
-
+		std::cout << number->get_value();
 	}
 	void visitBinaryOperation(BinaryOperation const* bop) {
-
+		std::cout << bop->get_left()->evaluate() << " ";
+		std::cout << bop->get_op() << " ";
+		std::cout << bop->get_right()->evaluate() << " ";
 	}
 
 };
@@ -100,8 +105,12 @@ struct PrintVisitor : Visitor {
 
 int main()
 {
-	Expression* exp = new BinaryOperation(new Number(5), '*', new Number(5));
+	Expression* exp = new BinaryOperation(new BinaryOperation(new Number(5), '*', new Number(5)), '*', new Number(5));
 	std::cout << "hello";
+	std::cout << std::endl;
 	Number a(2.5);
+	PrintBinaryOperationVisitor visitor;
+	exp->visit(&visitor);
+	delete exp;
 	return 0;
 }
