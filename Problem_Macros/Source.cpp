@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 // #define test1
 // #define recursion_io
 // #define recursion_reverse
@@ -14,7 +15,8 @@
 // #define TheProblem44
 // #define Sobes
 // #define VirtualBasefromSimple
-#define Lecture3MIPT
+// #define Lecture3MIPT
+#define WorkWithFiles
 class A
 {
 public:
@@ -432,9 +434,43 @@ int main()
 #ifdef Lecture3MIPT
 	size_t k = 8;
 	int x = x;
-	std::cout 
-	// String s2 = s;
-	
+	std::cout
+		// String s2 = s;
+
+#endif
+#ifdef WorkWithFiles
+	//std::ofstream fout;
+	std::string path = "Hacker.txt";
+	// fout.open(path, std::ofstream::app);
+	/*
+	if (!fout.is_open()) {
+		std::cout << "File is not open";
+	}
+	else {
+		std::cout << path;
+		std::cout << "Input the number";
+		int a = 0;
+		std::cin >> a;
+		fout << a;
+	}
+	fout.close();
+	*/
+	std::ifstream fin;
+	fin.open(path);
+	if (!fin.is_open()) {
+		std::cout << "Error";
+	}
+	else {
+		std::cout << "File is opend" << std::endl;
+		std::string str = "";
+		char ch = 'a';
+		while (!fin.eof()) {
+			fin >> str;
+			std::cout << str << std::endl;
+		}
+	}
+	fin.close();
+
 #endif
 
 	return 0;
