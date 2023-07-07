@@ -19,8 +19,8 @@ struct Rational {
 	void mul(const int number);
 	void div(Rational number);
 	void div(const int number);
-	Rational& operator+() const;
-	Rational& operator-() const;
+	Rational operator+() const;
+	Rational operator-() const;
 	Rational& operator+=(const Rational& another);
 	Rational& operator+=(const int another);
 	Rational& operator-=(const Rational& another);
@@ -110,12 +110,12 @@ void Rational::div(const int number) {
 	denominator_ = denominator_ / del;
 }
 
-Rational& Rational::operator+() const {
+Rational Rational::operator+() const {
 	Rational number(this->numerator_, this->denominator_);
 	return number;
 }
 
-Rational& Rational::operator-() const {
+Rational Rational::operator-() const {
 	Rational number(this->numerator_, this->denominator_);
 	number.neg();
 	return number;
