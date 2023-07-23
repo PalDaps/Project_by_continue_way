@@ -165,16 +165,20 @@ Rational& Rational::operator /=(const int another) {
 	return *this;
 }
 
-Rational operator+(Rational& left, int right) {
-	return left += right;
+Rational operator+(const Rational& left, int right) {
+	Rational res = left;
+	return res += right;
 }
 
-Rational operator+(int left, Rational& right) {
-	return right += left;
+Rational operator+(int left, const Rational& right) {
+	Rational res = left;
+	return res += left;
 }
 
-Rational operator+(Rational& left, Rational& right) {
-	return left += left;
+Rational operator+(const Rational& left, const Rational& right) {
+	Rational res_left = left;
+	Rational res_right = right;
+	return res_left += res_right;
 }
 
 Rational& operator-(Rational& left, int right) {
@@ -186,7 +190,7 @@ Rational& operator-(int left, Rational& right) {
 }
 
 Rational operator-(Rational& left, Rational& right) {
-	return left -= left;
+	return left -= right;
 }
 
 Rational& operator*(Rational& left, int right) {
@@ -210,7 +214,7 @@ Rational& operator/(int left, Rational& right) {
 }
 
 Rational operator/(Rational& left, Rational& right) {
-	return left /= left;
+	return left /= right;
 }
 
 int main() {
@@ -223,7 +227,7 @@ int main() {
 	//	number1.mul(number2);
 	//	number1.div(number2);
 	//	number1 += number2;
-	Rational number1 = number3 + number2;
+	Rational number1 = number3 + 10;
 	std::cout << "Numerator_ of number1 : " << number1.numerator_ << std::endl;
 	std::cout << "Denominator_ of number1 : " << number1.denominator_ << std::endl;
 	return 0;
