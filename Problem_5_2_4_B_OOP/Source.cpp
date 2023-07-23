@@ -1,16 +1,17 @@
 #include <iostream>
 
 struct Rational {
-	// private:
+//	private:
 	int numerator_;
 	int denominator_;
-	// public:
+//	public:
 	Rational(int numerator_ = 0, int denominator_ = 1) : numerator_(numerator_), denominator_(denominator_) {
 		std::cout << "The constructor volunteered" << std::endl;
 	}
 	~Rational() {
 		std::cout << "The destructor volunteered" << std::endl;
 	}
+//	Is it possible to halve the code below? I don't know yet
 	void add(Rational number);
 	void add(const int number);
 	void sub(Rational number);
@@ -21,14 +22,14 @@ struct Rational {
 	void div(const int number);
 	Rational operator+() const;
 	Rational operator-() const;
-	Rational& operator+=(const Rational& another);
-	Rational& operator+=(const int another);
-	Rational& operator-=(const Rational& another);
-	Rational& operator-=(const int another);
-	Rational& operator*=(const Rational& another);
-	Rational& operator*=(const int another);
-	Rational& operator/=(const Rational& another);
-	Rational& operator/=(const int another);
+//	Rational& operator+=(const Rational& another);
+//	Rational& operator+=(const int another);
+//	Rational& operator-=(const Rational& another);
+//	Rational& operator-=(const int another);
+//	Rational& operator*=(const Rational& another);
+//	Rational& operator*=(const int another);
+//	Rational& operator/=(const Rational& another);
+//	Rational& operator/=(const int another);
 	int gcd(int a, int b);
 	void neg() { numerator_ = -numerator_; };
 	void inv() { std::swap(numerator_, denominator_); };
@@ -120,129 +121,171 @@ Rational Rational::operator-() const {
 	number.neg();
 	return number;
 }
-
-Rational& Rational::operator+=(const Rational& another) {
-	this->add(another);
-	return *this;
-}
-
-//Rational& operator+=(Rational& left, const Rational& right) { 
-//	left.add(right); 
-//	return left; 
+//
+//Rational& Rational::operator+=(const Rational& another) {
+//	this->add(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator+=(const int another) {
+//	this->add(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator-=(const Rational& another) {
+//	this->sub(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator-=(const int another) {
+//	this->sub(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator*=(const Rational& another) {
+//	this->mul(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator*=(const int another) {
+//	this->mul(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator /=(const Rational& another) {
+//	this->div(another);
+//	return *this;
+//}
+//
+//Rational& Rational::operator /=(const int another) {
+//	this->div(another);
+//	return *this;
 //}
 
-Rational& Rational::operator+=(const int another) {
-	this->add(another);
-	return *this;
+// In theory, all of the above can be replaced with four operators
+// 8 : 42 PM
+// 7 / 23 / 2023 
+// Its a magic
+
+Rational& operator+=(Rational& left, const Rational& right) { 
+	left.add(right); 
+	return left; 
 }
 
-Rational& Rational::operator-=(const Rational& another) {
-	this->sub(another);
-	return *this;
+Rational& operator-=(Rational& left, const Rational& right) {
+	left.sub(right);
+	return left;
 }
 
-Rational& Rational::operator-=(const int another) {
-	this->sub(another);
-	return *this;
+Rational& operator*=(Rational& left, const Rational& right) {
+	left.mul(right);
+	return left;
 }
 
-Rational& Rational::operator*=(const Rational& another) {
-	this->mul(another);
-	return *this;
+Rational& operator/=(Rational& left, const Rational& right) {
+	left.div(right);
+	return left;
 }
 
-Rational& Rational::operator*=(const int another) {
-	this->mul(another);
-	return *this;
+//Rational operator+(const Rational& left, int right) {
+//	Rational res = left;
+//	return res += right;
+//}
+//
+//Rational operator+(int left, const Rational& right) {
+//	Rational res = right;
+//	return res += left;
+//}
+//
+//Rational operator+(const Rational& left, const Rational& right) {
+//	Rational res_left = left;
+//	Rational res_right = right;
+//	return res_left += res_right;
+//}
+//
+//Rational operator-(const Rational& left, int right) {
+//	Rational res = left;
+//	return res -= right;
+//}
+//
+//Rational operator-(int left, const Rational& right) {
+//	Rational res = right;
+//	res.neg();
+//	return res += left;
+//}
+//
+//Rational operator-(const Rational& left, const Rational& right) {
+//	Rational res_left = left;
+//	Rational res_right = right;
+//	return res_left -= res_right;
+//}
+//
+//Rational operator*(const Rational& left, int right) {
+//	Rational res = left;
+//	return res *= right;
+//}
+//
+//Rational operator*(int left, const Rational& right) {
+//	Rational res = right;
+//	return res *= left;
+//}
+//
+//Rational operator*(const Rational& left, const Rational& right) {
+//	Rational res_left = left;
+//	Rational res_right = right;
+//	return res_left *= res_right;
+//}
+//
+//Rational operator/(const Rational& left, int right) {
+//	Rational res = left;
+//	return res /= right;
+//}
+//
+//Rational operator/(int left, const Rational& right) {
+//	Rational res = right;
+//	res.inv();
+//	return res *= left;
+//}
+//
+//Rational operator/(const Rational& left, const Rational& right) {
+//	Rational res_left = left;
+//	Rational res_right = right;
+//	return res_left /= res_right;
+//}
+
+// In theory, all of the above can be replaced with four operators
+// 8 : 28 PM
+// 7 / 23 / 2023 
+// Its a magic
+
+Rational operator+(Rational left, const Rational& right) {
+	return left += right;
 }
 
-Rational& Rational::operator /=(const Rational& another) {
-	this->div(another);
-	return *this;
+Rational operator-(Rational left, const Rational& right) {
+	return left -= right;
 }
 
-Rational& Rational::operator /=(const int another) {
-	this->div(another);
-	return *this;
+Rational operator*(Rational left, const Rational& right) {
+	return left *= right;
 }
 
-Rational operator+(const Rational& left, int right) {
-	Rational res = left;
-	return res += right;
-}
-
-Rational operator+(int left, const Rational& right) {
-	Rational res = right;
-	return res += left;
-}
-
-Rational operator+(const Rational& left, const Rational& right) {
-	Rational res_left = left;
-	Rational res_right = right;
-	return res_left += res_right;
-}
-
-Rational operator-(const Rational& left, int right) {
-	Rational res = left;
-	return res -= right;
-}
-
-Rational operator-(int left, const Rational& right) {
-	Rational res = right;
-	res.neg();
-	return res += left;
-}
-
-Rational operator-(const Rational& left, const Rational& right) {
-	Rational res_left = left;
-	Rational res_right = right;
-	return res_left -= res_right;
-}
-
-Rational operator*(const Rational& left, int right) {
-	Rational res = left;
-	return res *= right;
-}
-
-Rational operator*(int left, const Rational& right) {
-	Rational res = right;
-	return res *= left;
-}
-
-Rational operator*(const Rational& left, const Rational& right) {
-	Rational res_left = left;
-	Rational res_right = right;
-	return res_left *= res_right;
-}
-
-Rational operator/(const Rational& left, int right) {
-	Rational res = left;
-	return res /= right;
-}
-
-Rational operator/(int left, const Rational& right) {
-	Rational res = right;
-	res.inv();
-	return res *= left;
-}
-
-Rational operator/(const Rational& left, const Rational& right) {
-	Rational res_left = left;
-	Rational res_right = right;
-	return res_left /= res_right;
+Rational operator/(Rational left, const Rational& right) {
+	return left /= right;
 }
 
 int main() {
 	std::cout << "HELLO!" << std::endl;
+	// Rational number1(1, 2);
 	Rational number2(1, 2);
 	Rational number3(1, 2);
 	int a = 4;
-	//	number1.add(number2);
+	//  number1.add(5);
 	//	number1.sub(number2);
 	//	number1.mul(number2);
 	//	number1.div(number2);
 	//	number1 += number2;
-	Rational number1 = 11 + number3;
+	Rational number1 = 12 + 13;
 	std::cout << "Numerator_ of number1 : " << number1.numerator_ << std::endl;
 	std::cout << "Denominator_ of number1 : " << number1.denominator_ << std::endl;
 	return 0;
