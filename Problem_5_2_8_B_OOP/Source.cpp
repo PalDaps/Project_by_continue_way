@@ -20,10 +20,18 @@ struct Rational {
 	void mul(const int number);
 	void div(Rational number);
 	void div(const int number);
+
 	Rational operator+() const;
 	Rational operator-() const;
+
 	friend bool operator==(const Rational& left, const Rational& right);
 	friend bool operator<(const Rational& left, const Rational& right);
+
+	operator double() const {
+		Rational res = *this;
+		return res.to_double();
+	}
+
 	//	Rational& operator+=(const Rational& another);
 	//	Rational& operator+=(const int another);
 	//	Rational& operator-=(const Rational& another);
@@ -32,9 +40,11 @@ struct Rational {
 	//	Rational& operator*=(const int another);
 	//	Rational& operator/=(const Rational& another);
 	//	Rational& operator/=(const int another);
+
 	int gcd(int a, int b);
-	void neg() { numerator_ = -numerator_; };
-	void inv() { std::swap(numerator_, denominator_); };
+	void neg() { numerator_ = -numerator_; }
+	void inv() { std::swap(numerator_, denominator_); }
+	double to_double() { return numerator_ / (double)denominator_; }
 };
 
 int Rational::gcd(int a, int b) {
@@ -46,7 +56,7 @@ int Rational::gcd(int a, int b) {
 	while (ost != 0) {
 		ost = b % a;
 		b = a;
-		a = ost;	
+		a = ost;
 	}
 	return b;
 }
@@ -323,6 +333,12 @@ int main() {
 
 	//bool res_le = (1 < number3);
 	//std::cout << res_le << std::endl;
-	
+
+	//double res_double = number3.to_double();
+	//std::cout << res_double << std::endl;
+
+	double res_double = (double)number3;
+	std::cout << res_double << std::endl;
+
 	return 0;
 }
