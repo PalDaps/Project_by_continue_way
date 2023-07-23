@@ -31,6 +31,7 @@ struct Rational {
 	Rational& operator/=(const int another);
 	int gcd(int a, int b);
 	void neg() { numerator_ = -numerator_; };
+	void inv() { std::swap(numerator_, denominator_); };
 };
 
 int Rational::gcd(int a, int b) {
@@ -171,7 +172,7 @@ Rational operator+(const Rational& left, int right) {
 }
 
 Rational operator+(int left, const Rational& right) {
-	Rational res = left;
+	Rational res = right;
 	return res += left;
 }
 
@@ -181,40 +182,54 @@ Rational operator+(const Rational& left, const Rational& right) {
 	return res_left += res_right;
 }
 
-Rational& operator-(Rational& left, int right) {
-	return left -= right;
+Rational operator-(const Rational& left, int right) {
+	Rational res = left;
+	return res -= right;
 }
 
-Rational& operator-(int left, Rational& right) {
-	return right -= left;
+Rational operator-(int left, const Rational& right) {
+	Rational res = right;
+	res.neg();
+	return res += left;
 }
 
-Rational operator-(Rational& left, Rational& right) {
-	return left -= right;
+Rational operator-(const Rational& left, const Rational& right) {
+	Rational res_left = left;
+	Rational res_right = right;
+	return res_left -= res_right;
 }
 
-Rational& operator*(Rational& left, int right) {
-	return left *= right;
+Rational operator*(const Rational& left, int right) {
+	Rational res = left;
+	return res *= right;
 }
 
-Rational& operator*(int left, Rational& right) {
-	return right *= left;
+Rational operator*(int left, const Rational& right) {
+	Rational res = right;
+	return res *= left;
 }
 
-Rational operator*(Rational& left, Rational& right) {
-	return left *= left;
+Rational operator*(const Rational& left, const Rational& right) {
+	Rational res_left = left;
+	Rational res_right = right;
+	return res_left *= res_right;
 }
 
-Rational& operator/(Rational& left, int right) {
-	return left *= right;
+Rational operator/(const Rational& left, int right) {
+	Rational res = left;
+	return res /= right;
 }
 
-Rational& operator/(int left, Rational& right) {
-	return right *= left;
+Rational operator/(int left, const Rational& right) {
+	Rational res = right;
+	res.inv();
+	return res *= left;
 }
 
-Rational operator/(Rational& left, Rational& right) {
-	return left /= right;
+Rational operator/(const Rational& left, const Rational& right) {
+	Rational res_left = left;
+	Rational res_right = right;
+	return res_left /= res_right;
 }
 
 int main() {
@@ -227,7 +242,7 @@ int main() {
 	//	number1.mul(number2);
 	//	number1.div(number2);
 	//	number1 += number2;
-	Rational number1 = number3 + 10;
+	Rational number1 = 11 + number3;
 	std::cout << "Numerator_ of number1 : " << number1.numerator_ << std::endl;
 	std::cout << "Denominator_ of number1 : " << number1.denominator_ << std::endl;
 	return 0;
