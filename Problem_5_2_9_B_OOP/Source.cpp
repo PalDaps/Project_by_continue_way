@@ -87,25 +87,29 @@ struct string
 	private:
 		const string& object;
 		size_t begin;
+		char* substr;
 	public:
-		string_begin(const string& str, size_t begin) : object(str), begin(begin) {}
+		string_begin(const string& str, size_t begin) : object(str), begin(begin), substr(nullptr){}
 		
-		char* operator[](size_t end) {
-			char* substr = new char[end - begin + 2];
-			// delete
-			int c = 0;
-			for (int i = 0; i < end; i++) {
-				if (i >= begin) {
-					*(substr + c) = *(object.str + i);
-					c++;
-				}
+		const char* operator[](size_t end) {
+			if (substr != nullptr) delete[] substr;
+			if (end == begin || begin > end || begin >= object.size || end > object.size) {
+				substr = new char[1];
+				*substr = '\0';
+				return substr;
 			}
-			*(substr + end - begin) = '\0';
+			substr = new char[end - begin + 2];
+			int c = 0;
+			for (int i = begin; i < end; i++) {
+				*(substr + c) = *(object.str + i);
+				c++;
+			}
+			if (end != begin) *(substr + end - begin) = '\0';
 			return substr;
 		}
-		/*~string_begin() {
+		~string_begin() {
 			delete[] substr;
-		}*/
+		}
 	};
 
 	string_begin operator[](int begin) const{
@@ -167,10 +171,11 @@ int main()
     //a[0][0] = a[1][1] + 1;
     //a.show();
     //std::cin.get();
-
+	std::cout << "Start of the programm" << std::endl;
 	string b("hello");
 
 	const char* m = b[0][4];
 
+	std::cout << m << std::endl;
 	return 0;
 }
