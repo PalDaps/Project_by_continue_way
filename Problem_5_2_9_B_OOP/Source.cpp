@@ -91,30 +91,32 @@ struct string
 	private:
 		const string& object;
 		size_t begin;
-		char* substr;
+		// char* substr;
 	public:
-		string_begin(const string& str, size_t begin) : object(str), begin(begin), substr(nullptr){}
+		string_begin(const string& str, size_t begin) : object(str), begin(begin) {}
 		
 		// i need return my string, not the const char *
 		string operator[](size_t end) {
-			if (substr != nullptr) delete[] substr;
+			// if (substr != nullptr) delete[] substr;
 			if (end == begin || begin > end || begin >= object.size || end > object.size) {
-				substr = new char[1];
-				*substr = '\0';
-				return string(substr);
+				return string();
 			}
-			substr = new char[end - begin + 2];
+			string res = string(end - begin, '*');
+			// substr = new char[end - begin + 2];
 			int c = 0;
+			//for (int i = begin; i < end; i++) {
+			//	*(substr + c) = *(object.str + i);
+			//	c++;
+			//}
 			for (int i = begin; i < end; i++) {
-				*(substr + c) = *(object.str + i);
-				c++;
+				res.str[c++] = object.str[i];
 			}
-			if (end != begin) *(substr + end - begin) = '\0';
+			//if (end != begin) *(substr + end - begin) = '\0';
 
-			return string(substr);
+			return res;
 		}
 		~string_begin() {
-			delete[] substr;
+			// delete[] substr;
 		}
 	};
 
@@ -205,16 +207,16 @@ int main()
     //a.show();
     //std::cin.get();
 	std::cout << "Start of the program!!!" << std::endl;
-	string b("Stupid, fu***ng sample");
-	string s1 = b[0][0];
-	string s2 = b[-1][10];
-	string s3 = b[-1][0];
-	string s4 = b[0][-1];
-	string s5 = b[-2][-2];
-	string s6 = b[0][25];
-	string s7 = b[10][0];
+	//string b("Stupid, fu***ng sample");
+	//string s1 = b[0][0];
+	//string s2 = b[-1][10];
+	//string s3 = b[-1][0];
+	//string s4 = b[0][-1];
+	//string s5 = b[-2][-2];
+	//string s6 = b[0][25];
+	//string s7 = b[10][0];
 	// const char* m = b[0][4];
-	// test();
+	test();
 	// std::cout << m << std::endl;
 	_CrtDumpMemoryLeaks();
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
