@@ -1,5 +1,9 @@
 #include <iostream>
 #include <iomanip>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 
 //
 // In this task, you need to implement the [] operator for the 
@@ -91,12 +95,13 @@ struct string
 	public:
 		string_begin(const string& str, size_t begin) : object(str), begin(begin), substr(nullptr){}
 		
-		const char* operator[](size_t end) {
+		// i need return my string, not the const char *
+		string operator[](size_t end) {
 			if (substr != nullptr) delete[] substr;
 			if (end == begin || begin > end || begin >= object.size || end > object.size) {
 				substr = new char[1];
 				*substr = '\0';
-				return substr;
+				return string(substr);
 			}
 			substr = new char[end - begin + 2];
 			int c = 0;
@@ -105,7 +110,8 @@ struct string
 				c++;
 			}
 			if (end != begin) *(substr + end - begin) = '\0';
-			return substr;
+
+			return string(substr);
 		}
 		~string_begin() {
 			delete[] substr;
@@ -164,6 +170,33 @@ private:
 //    }
 //};
 
+void test()
+{
+	string const s1 = "hello";
+	string const s2 = s1[1][4];
+	string const s2a = s1[0][4];
+
+	string const s3 = "hello";
+	string const s4 = s3[0][5];
+
+	string const s5 = "hello";
+	// string const s6 = s5[2];
+
+	string const s7 = "hello";
+	string const s8 = s7[0][3];
+
+	string s11 = "Stupid, fu***ng sample";
+	// string s12 = s11[1];
+	// string s13 = s11[2];
+	string s14 = s11[1][4];
+	string s15 = s11[5][12];
+	string s16 = s11[11][11];
+	string s17 = s11[10][13];
+	string s18 = s11[5][7];
+	string s19 = s11[0][22];
+}
+
+
 int main()
 {
     //Matrix <double> a(2, 2);
@@ -171,11 +204,19 @@ int main()
     //a[0][0] = a[1][1] + 1;
     //a.show();
     //std::cin.get();
-	std::cout << "Start of the programm" << std::endl;
-	string b("hello");
-
-	const char* m = b[0][4];
-
-	std::cout << m << std::endl;
+	std::cout << "Start of the program!!!" << std::endl;
+	string b("Stupid, fu***ng sample");
+	string s1 = b[0][0];
+	string s2 = b[-1][10];
+	string s3 = b[-1][0];
+	string s4 = b[0][-1];
+	string s5 = b[-2][-2];
+	string s6 = b[0][25];
+	string s7 = b[10][0];
+	// const char* m = b[0][4];
+	// test();
+	// std::cout << m << std::endl;
+	_CrtDumpMemoryLeaks();
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	return 0;
 }
