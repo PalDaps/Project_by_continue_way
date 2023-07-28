@@ -62,12 +62,12 @@ struct string
 	string(const string& other)
 	{
 		this->size = other.size;
-		this->str = new char[other.size];
+		this->str = new char[other.size + 1];
 		for (int i = 0; i < other.size; i++)
 		{
 			this->str[i] = other.str[i];
 		}
-
+		str[other.size] = '\0';
 	}
 	void append(const string& stroka)
 	{
@@ -91,39 +91,23 @@ struct string
 	private:
 		const string& object;
 		size_t begin;
-		// char* substr;
 	public:
 		string_begin(const string& str, size_t begin) : object(str), begin(begin) {}
-		
-		// i need return my string, not the const char *
 		string operator[](size_t end) {
-			// if (substr != nullptr) delete[] substr;
-			if (end == begin || begin > end || begin >= object.size || end > object.size) {
+			if (end == begin || begin > end || begin >= object.size || end > object.size)
 				return string();
-			}
 			string res = string(end - begin, '*');
-			// substr = new char[end - begin + 2];
 			int c = 0;
-			//for (int i = begin; i < end; i++) {
-			//	*(substr + c) = *(object.str + i);
-			//	c++;
-			//}
-			for (int i = begin; i < end; i++) {
+			for (int i = begin; i < end; i++)
 				res.str[c++] = object.str[i];
-			}
-			//if (end != begin) *(substr + end - begin) = '\0';
-
 			return res;
 		}
 		~string_begin() {
-			// delete[] substr;
 		}
 	};
-
 	string_begin operator[](int begin) const{
 		return string_begin(*this, begin);
 	}
-
 private:
 	size_t size;
 	char* str;
